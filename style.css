@@ -1,0 +1,230 @@
+body {
+    font-family: system-ui, -apple-system, sans-serif;
+    margin: 0;
+    background-image: url('images/background.png');
+    background-size: 120%; 
+    background-position: left center; 
+    background-repeat: no-repeat;
+    background-attachment: fixed; 
+    min-height: 100vh;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+/* --- THE WRAPPER --- */
+#card-wrapper {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-x: hidden;
+}
+
+/* --- THE CARDS --- */
+.card {
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    
+    padding: 30px; 
+    border-radius: 16px;
+    width: fit-content;
+    max-width: 300px;
+    
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5); 
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.6s ease;
+}
+
+h1, p {
+    font-size: 1.2rem;
+    line-height: 1.5;
+    color: black;
+}
+
+/* --- THE 3 SLIDE STATES --- */
+.card.active {
+    transform: translateX(0) scale(1);
+    opacity: 1;
+    z-index: 10;
+    pointer-events: auto; 
+}
+
+.card.hidden-left {
+    transform: translateX(-100vw) scale(0.8);
+    opacity: 0;
+    z-index: 1;
+    pointer-events: none; 
+}
+
+.card.hidden-right {
+    transform: translateX(100vw) scale(0.8);
+    opacity: 0;
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* --- INTERNAL BUTTON STYLING --- */
+.card-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.nav-btn {
+    padding: 10px 20px;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 1rem;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.nav-btn:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+    transform: scale(1.05);
+}
+
+/* --- START SCREEN & IMAGE BUTTON --- */
+#start-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.4); 
+    backdrop-filter: blur(5px); 
+    -webkit-backdrop-filter: blur(5px);
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999; 
+    transition: opacity 0.5s ease; 
+}
+
+#start-btn {
+    background: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+.button-img {
+    width: 500px;
+    height: auto;
+    pointer-events: none;
+    transition: transform 0.2s ease, filter 0.2s ease;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.5));
+}
+
+#start-btn:hover .button-img {
+    transform: scale(1.1);
+}
+
+/* --- STIKER & SCREENSHOTS --- */
+.sticker {
+    position: absolute;
+    width: 90px;
+    height: auto;
+    top: -20px; 
+    left: -20px;
+    z-index: 20;
+    transform: rotate(-15deg);
+    filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.3));
+    pointer-events: none; 
+}
+
+.screenshot {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-top: 15px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    user-select: none;
+    pointer-events: none;
+}
+
+/* --- SOUND BUTTON --- */
+#sound-icon {
+    width: 24px;
+    height: 24px;
+    pointer-events: none; 
+}
+
+#sound-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: rgba(255, 255, 255, 0.85); 
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    z-index: 1000;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); 
+}
+
+#sound-btn:hover {
+    background-color: rgba(255, 255, 255, 1);
+    transform: scale(1.1);
+}
+
+/* --- FALLING GOLDEN LEAVES EFFECT --- */
+#leaves-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none; 
+    z-index: 5;
+    overflow: hidden;
+}
+
+.leaf {
+    position: absolute;
+    top: -50px;
+    width: 18px;
+    height: 18px;
+    background: linear-gradient(135deg, #FFFF6680, #FFFF0080, #FFEA0080);
+    border-radius: 0 50% 0 50%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+@keyframes fall {
+    0% { top: -10%; opacity: 0; }
+    10% { opacity: 1; }
+    80% { opacity: 1; }
+    100% { top: 110%; opacity: 0; }
+}
+
+@keyframes sway {
+    0% { transform: translateX(0px) rotate(0deg); }
+    100% { transform: translateX(80px) rotate(70deg); }
+}
+
+@media (max-width: 768px) {
+    .card {
+        padding: 30px 20px;
+        width: fit-content;
+        max-width: 85vw;
+    }
+}
